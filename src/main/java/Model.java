@@ -1,6 +1,6 @@
 package main.java;
 
-public class Game {
+public class Model {
 
     private String[] getWordsArray() {
         return new String[]{
