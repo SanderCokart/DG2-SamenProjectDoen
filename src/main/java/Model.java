@@ -1,16 +1,9 @@
 package main.java;
 
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
-import java.awt.event.ActionEvent;
 import java.util.Random;
 
-
 public class Model {
-
-    @FXML
-    private static Label chancesLabel = new Label();
 
     private String[] getWordsArray() {
         return new String[]{
@@ -32,8 +25,10 @@ public class Model {
         return words[randomNumber];
     }
 
-    public static int decreaseChances(int amountOfChances) {
-        return --amountOfChances;
+    public static int decreaseChances(int amountOfChances, Label label) {
+        amountOfChances--; // decrease by 1
+        label.setText(Integer.toString(amountOfChances)); // update the label
+        return amountOfChances; // return the new amount of chances
     }
 
 }
