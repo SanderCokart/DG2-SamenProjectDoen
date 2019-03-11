@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.Controller">
    <children>
       <HBox layoutX="10.0" layoutY="10.0" prefHeight="350.0" prefWidth="900.0">
          <children>
@@ -24,13 +24,13 @@
             <TextField alignment="CENTER" prefHeight="60.0" prefWidth="130.0" promptText="Letter invullen" />
             <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" text="Letter invoeren" textAlignment="CENTER" />
             <TextField alignment="CENTER" prefHeight="60.0" prefWidth="500.0" promptText="Woord invoeren" />
-            <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="248.0" text="Button" />
+            <Button mnemonicParsing="false" onAction="#validateCharInput" prefHeight="58.0" prefWidth="248.0" text="Button" />
          </children>
       </HBox>
       <HBox prefHeight="138.0" prefWidth="1000.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
          <children>
             <Label alignment="CENTER" prefHeight="138.0" prefWidth="760.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;" text="Foute letters" textAlignment="CENTER" />
-            <Label alignment="CENTER" prefHeight="138.0" prefWidth="248.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;" text="Kansen" textAlignment="CENTER" />
+            <Label fx:id="chancesLabel" alignment="CENTER" prefHeight="138.0" prefWidth="248.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;" textAlignment="CENTER" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="170.0" prefWidth="1000.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
