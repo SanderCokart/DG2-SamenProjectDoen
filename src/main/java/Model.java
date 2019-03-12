@@ -4,6 +4,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import java.util.Random;
 
+import static java.lang.System.exit;
+
 public class Model {
 
 
@@ -48,27 +50,15 @@ public class Model {
                     return true; // there's a match, so return false
                 }
             }
-        } else if (inputChar.length() > 1) { // give error message
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Er is iets mis met de ingevoerde letter");
-            alert.setContentText("Controleer of er maar één letter is ingevoerd!");
-            alert.showAndWait();
         }
-
         return false;
     }
 
     public static void addCharToFaultyCharArray(String inputChar, Label label) {
-        if (inputChar.length() > 1){
-            return;
-
-        } else {
-
-            if (label.getText().isEmpty()) {
+        if (label.getText().isEmpty()) {
             label.setText(inputChar);
-            } else {
+        } else {
             label.setText(label.getText() + ", " + inputChar);
-            }
         }
     }
 }
