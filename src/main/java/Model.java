@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Model {
 
-    private String[] getWordsArray() {
+    private static String[] getWordsArray() {
         return new String[]{
                 "appel", "banaan", "pelikaan", "auto", "laptop", "beeldscherm", "toetsenbord", "natuur", "lampen",
                 "jassen", "adapter", "lichtbron", "bankstel", "stekker", "oordopjes", "koptelefoon", "kruk", "bar",
@@ -14,7 +14,7 @@ public class Model {
         };
     }
 
-    public String getRandomWord() {
+    public static String getRandomWord() {
         Random rand = new Random();
 
         // Obtain a number between [0 - 30].
@@ -31,4 +31,17 @@ public class Model {
         return amountOfChances; // return the new amount of chances
     }
 
+    public static boolean validateChar(String word) {
+        char input = 'a';
+        char[] letters = word.toCharArray();
+
+        for (int i = 0; i < letters.length; i++) {
+            if (input == letters[i]) {
+                System.out.println("true");
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 }

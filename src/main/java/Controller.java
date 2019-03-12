@@ -13,6 +13,14 @@ public class Controller {
 
     public void validateCharInput(ActionEvent event) { // basic method to test the decreaseChanges method
         chances = Model.decreaseChances(chances, chancesLabel); // decrease and update label
+        String word = Model.getRandomWord();
+
+        if (Model.validateChar(word)){
+
+        } else {
+            //code
+        }
+
     }
 
 }
