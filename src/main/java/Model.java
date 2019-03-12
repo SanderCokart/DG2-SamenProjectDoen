@@ -54,6 +54,8 @@ public class Model {
                 imageView.setImage(image4);
                 break;
             case 0:
+                Image image5 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage5.png"));
+                imageView.setImage(image5);
                 // game over
                 break;
         }

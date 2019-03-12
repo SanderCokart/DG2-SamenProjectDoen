@@ -21,8 +21,6 @@ public class Controller {
         if (Model.validateChar(charInputValue, Model.getRandomWord())) { // char matches
 //            addCharToSelectedWord(charInputValue); //
         } else if (charInputValue.length() == 1 && Character.isLetter(charInputValue.charAt(0))) { // char doesn't match
-            Image image = new Image(getClass().getResourceAsStream("../resources/galgjeStage5.png"));
-            galgjeStage.setImage(image);
             Model.decreaseChances(chancesLabel, galgjeStage);
             Model.addCharToFaultyChars(charInputValue, wrongLettersLabel);
         } else { // give error message
