@@ -5,13 +5,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Controller {
 
     @FXML private Label chancesLabel;
     @FXML private Label wrongLettersLabel;
+    @FXML private Label wordLabel;
     @FXML private TextField charInputField;
     @FXML private TextField wordInputField;
     @FXML private ImageView galgjeStage;
@@ -19,7 +19,7 @@ public class Controller {
     public void validateCharInput(ActionEvent event) {
         String charInputValue = charInputField.getText(); // get value of input field
         if (Model.validateChar(charInputValue, Model.getRandomWord())) { // char matches
-//            addCharToSelectedWord(charInputValue); //
+            //            addCharToSelectedWord(charInputValue); //
         } else if (charInputValue.length() == 1 && Character.isLetter(charInputValue.charAt(0))) { // char doesn't match
             Model.decreaseChances(chancesLabel, galgjeStage);
             Model.addCharToFaultyChars(charInputValue, wrongLettersLabel);
@@ -32,7 +32,7 @@ public class Controller {
     }
 
     public void validateWordInput(ActionEvent event) {
-
+        Model.validateWord(wordLabel, wordInputField, chancesLabel, galgjeStage);
     }
 
 }

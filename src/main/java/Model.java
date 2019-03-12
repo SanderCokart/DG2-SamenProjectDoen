@@ -1,6 +1,7 @@
 package main.java;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -34,7 +35,7 @@ public class Model {
 
     static int amountOfChances = 5;
 
-    public static int decreaseChances(Label label, ImageView imageView) {
+    public static int decreaseChances(Label chancesLabel, ImageView imageView) {
         amountOfChances--; // decrease by 1
         switch (amountOfChances) { // update stage of HANGMAN according to amount of chances
             case 4:
@@ -59,7 +60,7 @@ public class Model {
                 // game over
                 break;
         }
-        label.setText(Integer.toString(amountOfChances)); // update the label
+        chancesLabel.setText(Integer.toString(amountOfChances)); // update the label
         return amountOfChances; // return the new amount of chances
     }
 
@@ -80,6 +81,16 @@ public class Model {
             label.setText(inputChar);
         } else { // append faulty char
             label.setText(label.getText() + ", " + inputChar);
+        }
+    }
+
+    public static void validateWord(Label wordLabel, TextField wordInputField, Label chancesLabel, ImageView galgjeStage) {
+
+        if (wordInputField.getText().equals(Model.getRandomWord())){
+            wordLabel.setText("YOU WIN!");
+        } else {
+            wordLabel.setText("WRONG ANSWER!");
+            decreaseChances(chancesLabel, galgjeStage);
         }
     }
 }
