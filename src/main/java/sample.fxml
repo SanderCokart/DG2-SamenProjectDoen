@@ -21,10 +21,10 @@
       </HBox>
       <HBox prefHeight="60.0" prefWidth="1000.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
          <children>
-            <TextField alignment="CENTER" prefHeight="60.0" prefWidth="130.0" promptText="Letter invullen" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="130.0" text="Letter invoeren" textAlignment="CENTER" />
-            <TextField alignment="CENTER" prefHeight="60.0" prefWidth="500.0" promptText="Woord invoeren" />
-            <Button mnemonicParsing="false" onAction="#validateCharInput" prefHeight="58.0" prefWidth="248.0" text="Button" />
+            <TextField fx:id="charInputField" alignment="CENTER" prefHeight="60.0" prefWidth="130.0" promptText="Letter invullen" />
+            <Button mnemonicParsing="false" onAction="#validateCharInput" prefHeight="60.0" prefWidth="130.0" text="Letter invoeren" textAlignment="CENTER" />
+            <TextField fx:id="wordInputField" alignment="CENTER" prefHeight="60.0" prefWidth="500.0" promptText="Woord invoeren" />
+            <Button mnemonicParsing="false" onAction="#validateWordInput" prefHeight="58.0" prefWidth="248.0" text="Button" />
          </children>
       </HBox>
       <HBox prefHeight="138.0" prefWidth="1000.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
