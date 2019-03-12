@@ -2,13 +2,13 @@ package main.java;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class Controller {
 
     @FXML private Label chancesLabel;
+    @FXML private Label wrongLettersLabel;
     @FXML private TextField charInputField;
     @FXML private TextField wordInputField;
 
@@ -18,7 +18,7 @@ public class Controller {
 //            addCharToSelectedWord(charInputValue); //
         } else { // char doesn't match
             Model.decreaseChances(chancesLabel);
-//            addCharToFaultyCharArray();
+            Model.addCharToFaultyCharArray(charInputValue, wrongLettersLabel);
         }
     }
 

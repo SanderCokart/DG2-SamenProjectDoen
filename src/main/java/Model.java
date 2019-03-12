@@ -32,7 +32,8 @@ public class Model {
 
     }
 
-    static int amountOfChances;
+    static int amountOfChances = 5;
+
     public static int decreaseChances(Label label) {
         amountOfChances--; // decrease by 1
         label.setText(Integer.toString(amountOfChances)); // update the label
@@ -57,5 +58,17 @@ public class Model {
         return false;
     }
 
+    public static void addCharToFaultyCharArray(String inputChar, Label label) {
+        if (inputChar.length() > 1){
+            return;
 
+        } else {
+
+            if (label.getText().isEmpty()) {
+            label.setText(inputChar);
+            } else {
+            label.setText(label.getText() + ", " + inputChar);
+            }
+        }
+    }
 }
