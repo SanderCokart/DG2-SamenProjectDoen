@@ -1,14 +1,12 @@
 package main.java;
 
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import java.util.Random;
 
-import static java.lang.System.exit;
-
 public class Model {
-
-
 
     private static String[] getWordsArray() {
         return new String[]{
@@ -36,8 +34,29 @@ public class Model {
 
     static int amountOfChances = 5;
 
-    public static int decreaseChances(Label label) {
+    public static int decreaseChances(Label label, ImageView imageView) {
         amountOfChances--; // decrease by 1
+        switch (amountOfChances) { // update stage of HANGMAN according to amount of chances
+            case 4:
+                Image image1 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage1.png"));
+                imageView.setImage(image1);
+                break;
+            case 3:
+                Image image2 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage2.png"));
+                imageView.setImage(image2);
+                break;
+            case 2:
+                Image image3 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage3.png"));
+                imageView.setImage(image3);
+                break;
+            case 1:
+                Image image4 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage4.png"));
+                imageView.setImage(image4);
+                break;
+            case 0:
+                // game over
+                break;
+        }
         label.setText(Integer.toString(amountOfChances)); // update the label
         return amountOfChances; // return the new amount of chances
     }
@@ -47,17 +66,17 @@ public class Model {
             char[] charArray = word.toCharArray();
             for (char wordChar : charArray) {
                 if (inputChar.equals(Character.toString(wordChar))) {
-                    return true; // there's a match, so return false
+                    return true; // there's a match, so return true
                 }
             }
         }
         return false;
     }
 
-    public static void addCharToFaultyCharArray(String inputChar, Label label) {
-        if (label.getText().isEmpty()) {
+    public static void addCharToFaultyChars(String inputChar, Label label) {
+        if (label.getText().isEmpty()) { // add the first faulty char
             label.setText(inputChar);
-        } else {
+        } else { // append faulty char
             label.setText(label.getText() + ", " + inputChar);
         }
     }
