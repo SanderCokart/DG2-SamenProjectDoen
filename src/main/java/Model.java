@@ -1,9 +1,12 @@
 package main.java;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import java.util.Random;
 
 public class Model {
+
+
 
     private static String[] getWordsArray() {
         return new String[]{
@@ -14,34 +17,45 @@ public class Model {
         };
     }
 
+    private static boolean wordIsCreated = false;
+    private static String createdWord;
+
     public static String getRandomWord() {
-        Random rand = new Random();
+        if (!wordIsCreated) {
+            String[] words = getWordsArray();
+            Random rand = new Random();
+            int randomNumber = rand.nextInt(30); // Obtain a number between [0 - 30]
+            createdWord = words[randomNumber];
+            wordIsCreated = true;
+        }
+        return createdWord;
 
-        // Obtain a number between [0 - 30].
-        int randomNumber = rand.nextInt(30);
-
-        String[] words = getWordsArray();
-
-        return words[randomNumber];
     }
 
-    public static int decreaseChances(int amountOfChances, Label label) {
+    static int amountOfChances;
+    public static int decreaseChances(Label label) {
         amountOfChances--; // decrease by 1
         label.setText(Integer.toString(amountOfChances)); // update the label
         return amountOfChances; // return the new amount of chances
     }
 
-    public static boolean validateChar(String word) {
-        char input = 'a';
-        char[] letters = word.toCharArray();
-
-        for (int i = 0; i < letters.length; i++) {
-            if (input == letters[i]) {
-                System.out.println("true");
-                return true;
-            } else {
-                return false;
+    public static boolean validateChar(String inputChar, String word) {
+        if (inputChar.length() == 1) { // check if char matches a char in the word
+            char[] charArray = word.toCharArray();
+            for (char wordChar : charArray) {
+                if (inputChar.equals(Character.toString(wordChar))) {
+                    return true; // there's a match, so return false
+                }
             }
+        } else if (inputChar.length() > 1) { // give error message
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Er is iets mis met de ingevoerde letter");
+            alert.setContentText("Controleer of er maar één letter is ingevoerd!");
+            alert.showAndWait();
         }
+
+        return false;
     }
+
+
 }
