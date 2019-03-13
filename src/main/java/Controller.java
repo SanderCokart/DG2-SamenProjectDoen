@@ -31,8 +31,18 @@ public class Controller {
         }
     }
 
+    private boolean wordButtonIsPressed = false;
+
     public void validateWordInput(ActionEvent event) {
-        Model.validateWord(wordLabel, wordInputField, chancesLabel, galgjeStage);//method to validate if the word matches with the wordInputField
+        if (wordButtonIsPressed) { // check if the word is correct and disable the inputfield
+            Model.validateWord(wordLabel, wordInputField, chancesLabel, galgjeStage);//method to validate if the word matches with the wordInputField
+            wordInputField.setDisable(true);
+            wordButtonIsPressed = false;
+        } else { // allow the inputfield to be changed
+            wordInputField.setDisable(false);
+            wordButtonIsPressed = true;
+        }
+
     }
 
 }

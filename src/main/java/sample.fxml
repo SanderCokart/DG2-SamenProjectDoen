@@ -30,11 +30,11 @@
                <font>
                   <Font name="Agency FB" size="18.0" />
                </font></Button>
-            <TextField fx:id="wordInputField" alignment="CENTER" prefHeight="60.0" prefWidth="500.0" promptText="Woord invoeren">
+            <TextField fx:id="wordInputField" alignment="CENTER" disable="true" prefHeight="60.0" prefWidth="500.0" promptText="Woord invoeren">
                <font>
                   <Font name="Agency FB" size="28.0" />
                </font></TextField>
-            <Button mnemonicParsing="false" onAction="#validateWordInput" prefHeight="58.0" prefWidth="248.0" text="Submit">
+            <Button mnemonicParsing="false" onAction="#validateWordInput" prefHeight="58.0" prefWidth="248.0" text="Woord invoeren">
                <font>
                   <Font name="Agency FB" size="28.0" />
                </font></Button>
@@ -54,7 +54,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="170.0" prefWidth="1000.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
          <children>
-            <Label fx:id="wordLabel" alignment="CENTER" prefHeight="55.0" prefWidth="613.0" text="woord" textAlignment="CENTER">
+            <Label fx:id="wordLabel" alignment="CENTER" prefHeight="163.0" prefWidth="1005.0" textAlignment="CENTER" underline="true">
                <font>
                   <Font name="Agency FB Bold" size="45.0" />
                </font></Label>
