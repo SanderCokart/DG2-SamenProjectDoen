@@ -76,6 +76,25 @@ public class Model {
         return false;
     }
 
+
+    private static char[] selectedWordCharArray = getRandomWord().toCharArray(); // create char array from the selected word
+    private static char[] labelWordCharArray = new char[selectedWordCharArray.length]; // create char array that will be set to the label
+    private static int i = 0; // initialise index counter
+    public static void addCharToSelectedWord(char inputChar, String word, Label label) {
+        for (char selectedWordChar : selectedWordCharArray) {
+            if (inputChar == selectedWordChar) { // if char matches char in selectedWordCharArray
+                labelWordCharArray[i] = inputChar;
+            } else if (labelWordCharArray[i] == 0) { // if the char element is empty, put a ' ' in it
+                labelWordCharArray[i] = ' ';
+            }
+            i++; // increment for use as index
+        }
+        i = 0; // reset index counter
+        String string = new String(labelWordCharArray); // convert char array to String
+        label.setText(string); // set array to label
+
+    }
+
     public static void addCharToFaultyChars(String inputChar, Label label) {
         if (label.getText().isEmpty()) { // add the first faulty char
             label.setText(inputChar);

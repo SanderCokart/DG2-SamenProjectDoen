@@ -54,7 +54,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="170.0" prefWidth="1000.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
          <children>
-            <Label fx:id="wordLabel" alignment="CENTER" prefHeight="55.0" prefWidth="613.0" text="woord" textAlignment="CENTER">
+            <Label fx:id="wordLabel" alignment="CENTER" prefHeight="55.0" prefWidth="613.0" textAlignment="CENTER" underline="true">
                <font>
                   <Font name="Agency FB Bold" size="45.0" />
                </font></Label>
