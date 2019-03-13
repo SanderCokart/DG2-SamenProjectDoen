@@ -104,10 +104,10 @@ public class Model {
         }
     }
 
-    public static void validateWord(Label wordLabel, TextField wordInputField, Label chancesLabel, ImageView galgjeStage) {//method to validate the word inserted in wordInputField
+    public static void validateWord(TextField wordInputField, Label chancesLabel, ImageView galgjeStage) {//method to validate the word inserted in wordInputField
 
         if (wordInputField.getText().equals(Model.getRandomWord())){//if text of wordInputField equals the random word
-            wordLabel.setText("YOU WIN!");//tell the player he won
+            showGameWin();
         } else if (wordInputField.getText().length() <= 1){//else if the wordInputField has less than 2 characters
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Niet genoeg characters!");
@@ -119,17 +119,17 @@ public class Model {
     }
 
     public static void showGameLost() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Je hebt verloren");
-        alert.setHeaderText("Zelfs dit is te moeilijk voor je...");
-        alert.setContentText("Kies een optie:");
+        Alert alertLose = new Alert(Alert.AlertType.CONFIRMATION);
+        alertLose.setTitle("Je hebt verloren");
+        alertLose.setHeaderText("Zelfs dit is te moeilijk voor je...");
+        alertLose.setContentText("Kies een optie:");
 
         ButtonType retryButton = new ButtonType("Opnieuw spelen");
         ButtonType quitButton = new ButtonType("Spel afsluiten");
 
-        alert.getButtonTypes().setAll(retryButton, quitButton);
+        alertLose.getButtonTypes().setAll(retryButton, quitButton);
 
-        Optional<ButtonType> result = alert.showAndWait();
+        Optional<ButtonType> result = alertLose.showAndWait();
         if (result.get() == retryButton){
             wordIsCreated = false;
             amountOfChances = 5;
@@ -137,5 +137,26 @@ public class Model {
         } else if (result.get() == quitButton) {
             System.exit(0);
         }
+    }
+
+    public static void showGameWin() {//method to show a message that tells the player he won
+        Alert alertWin = new Alert(Alert.AlertType.INFORMATION);//creates an alert window
+        alertWin.setTitle("WINNER WINNER CHICKEN DINNER!");//sets the title of the window to this
+        alertWin.setContentText("Congratulations you win!!");//sets the content text to this
+
+        ButtonType retryButton = new ButtonType("Opnieuw spelen");//creates a button
+        ButtonType quitButton = new ButtonType("Spel afsluiten");//creates a button
+        alertWin.getButtonTypes().setAll(retryButton, quitButton);//turns the buttons on
+
+        Optional<ButtonType> result = alertWin.showAndWait();//shows the buttons
+        if (result.get() == retryButton){//if you press the reset button
+            wordIsCreated = false;//set default states
+            amountOfChances = 5;
+
+            getRandomWord();
+        } else if (result.get() == quitButton) {//if you press quit button
+            System.exit(0);//exit programm
+        }
+
     }
 }
