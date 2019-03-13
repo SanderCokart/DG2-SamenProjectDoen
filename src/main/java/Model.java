@@ -1,11 +1,13 @@
 package main.java;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.Optional;
 import java.util.Random;
 
 public class Model {
@@ -31,13 +33,13 @@ public class Model {
             wordIsCreated = true;//sets the wordIsCreated boolean to true
         }
         return createdWord;//return the createdWord return
-
     }
 
     static int amountOfChances = 5;
 
     public static int decreaseChances(Label chancesLabel, ImageView imageView) {
         amountOfChances--; // decrease by 1
+        chancesLabel.setText(Integer.toString(amountOfChances)); // update the label
         switch (amountOfChances) { // update stage of HANGMAN according to amount of chances
             case 4:
                 Image image1 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage1.png"));
@@ -55,13 +57,12 @@ public class Model {
                 Image image4 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage4.png"));
                 imageView.setImage(image4);
                 break;
-            case 0:
+            case 0: // game over
                 Image image5 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage5.png"));
                 imageView.setImage(image5);
-                // game over
+                showGameLost();
                 break;
         }
-        chancesLabel.setText(Integer.toString(amountOfChances)); // update the label
         return amountOfChances; // return the new amount of chances
     }
 
@@ -93,9 +94,7 @@ public class Model {
         i = 0; // reset index counter
         String string = new String(labelWordCharArray); // convert char array to String
         label.setText(string); // set array to label
-
     }
-
 
     public static void addCharToFaultyChars(String inputChar, Label wrongLettersLabel) {//method to add the wrong guessed words to the
         if (wrongLettersLabel.getText().isEmpty()) { //if the wrongLettersLabel = empty then
@@ -116,6 +115,27 @@ public class Model {
             alert.showAndWait();
         } else {
             decreaseChances(chancesLabel, galgjeStage);//else decrease the amount of chances
+        }
+    }
+
+    public static void showGameLost() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Je hebt verloren");
+        alert.setHeaderText("Zelfs dit is te moeilijk voor je...");
+        alert.setContentText("Kies een optie:");
+
+        ButtonType retryButton = new ButtonType("Opnieuw spelen");
+        ButtonType quitButton = new ButtonType("Spel afsluiten");
+
+        alert.getButtonTypes().setAll(retryButton, quitButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == retryButton){
+            wordIsCreated = false;
+            amountOfChances = 5;
+            getRandomWord();
+        } else if (result.get() == quitButton) {
+            System.exit(0);
         }
     }
 }
