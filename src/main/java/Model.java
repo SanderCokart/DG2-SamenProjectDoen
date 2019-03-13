@@ -76,10 +76,10 @@ public class Model {
         return false;
     }
 
-
     private static char[] selectedWordCharArray = getRandomWord().toCharArray(); // create char array from the selected word
     private static char[] labelWordCharArray = new char[selectedWordCharArray.length]; // create char array that will be set to the label
     private static int i = 0; // initialise index counter
+
     public static void addCharToSelectedWord(char inputChar, String word, Label label) {
         for (char selectedWordChar : selectedWordCharArray) {
             if (inputChar == selectedWordChar) { // if char matches char in selectedWordCharArray
@@ -95,6 +95,7 @@ public class Model {
 
     }
 
+
     public static void addCharToFaultyChars(String inputChar, Label label) {
         if (label.getText().isEmpty()) { // add the first faulty char
             label.setText(inputChar);
@@ -108,7 +109,6 @@ public class Model {
         if (wordInputField.getText().equals(Model.getRandomWord())){
             wordLabel.setText("YOU WIN!");
         } else {
-            wordLabel.setText("WRONG ANSWER!");
             decreaseChances(chancesLabel, galgjeStage);
         }
     }

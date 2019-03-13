@@ -19,10 +19,10 @@ public class Controller {
     public void validateCharInput(ActionEvent event) {
         String charInputValue = charInputField.getText(); // get value of input field
         if (Model.validateChar(charInputValue, Model.getRandomWord())) { // char matches
-            Model.addCharToSelectedWord(charInputValue.charAt(0), Model.getRandomWord(), wordLabel); //
+            Model.addCharToSelectedWord(charInputValue.charAt(0), Model.getRandomWord(), wordLabel); // add char to selected word
         } else if (charInputValue.length() == 1 && Character.isLetter(charInputValue.charAt(0))) { // char doesn't match
-            Model.decreaseChances(chancesLabel, galgjeStage);
-            Model.addCharToFaultyChars(charInputValue, wrongLettersLabel);
+            Model.decreaseChances(chancesLabel, galgjeStage); // decrease chances and update label
+            Model.addCharToFaultyChars(charInputValue, wrongLettersLabel); // add char to the faulty char label
         } else { // give error message
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Er is iets mis met de ingevoerde letter");
