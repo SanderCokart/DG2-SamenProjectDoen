@@ -1,5 +1,6 @@
 package main.java;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -105,13 +106,16 @@ public class Model {
     }
 
     public static void validateWord(Label wordLabel, TextField wordInputField, Label chancesLabel, ImageView galgjeStage) {//method to validate the word inserted in wordInputField
+
         if (wordInputField.getText().equals(Model.getRandomWord())){//if text of wordInputField equals the random word
             wordLabel.setText("YOU WIN!");//tell the player he won
-        } else if(wordInputField.getText().length() <= 1){//else if the wordInputField has less than 2 characters
-            wordLabel.setText("Not enough characters entered to make a word");//tell the player there are not enough characters
+        } else if (wordInputField.getText().length() <= 1){//else if the wordInputField has less than 2 characters
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Niet genoeg characters!");
+            alert.setContentText("Zorg wel dat er genoeg letters zijn om een woord te maken!");
+            alert.showAndWait();
         } else {
             decreaseChances(chancesLabel, galgjeStage);//else decrease the amount of chances
-//            error
         }
     }
 }
