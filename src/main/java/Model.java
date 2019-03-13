@@ -32,6 +32,7 @@ public class Model {
             createdWord = words[randomNumber];//createdWord variable  gets set to the random word
             wordIsCreated = true;//sets the wordIsCreated boolean to true
         }
+        System.out.println(createdWord);
         return createdWord;//return the createdWord return
     }
 
@@ -60,7 +61,7 @@ public class Model {
             case 0: // game over
                 Image image5 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage5.png"));
                 imageView.setImage(image5);
-                showGameLost();
+                showGameLost(imageView);
                 break;
         }
         return amountOfChances; // return the new amount of chances
@@ -107,7 +108,7 @@ public class Model {
     public static void validateWord(TextField wordInputField, Label chancesLabel, ImageView galgjeStage) {//method to validate the word inserted in wordInputField
 
         if (wordInputField.getText().equals(Model.getRandomWord())){//if text of wordInputField equals the random word
-            showGameWin();
+            showGameWin(galgjeStage);
         } else if (wordInputField.getText().length() <= 1){//else if the wordInputField has less than 2 characters
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Niet genoeg characters!");
@@ -118,29 +119,27 @@ public class Model {
         }
     }
 
-    public static void showGameLost() {
-        Alert alertLose = new Alert(Alert.AlertType.CONFIRMATION);
-        alertLose.setTitle("Je hebt verloren");
-        alertLose.setHeaderText("Zelfs dit is te moeilijk voor je...");
-        alertLose.setContentText("Kies een optie:");
+    public static void showGameLost(ImageView imageView) { // method for losing screen
+        Alert alertLose = new Alert(Alert.AlertType.CONFIRMATION); // alert window with type
+        alertLose.setTitle("Je hebt verloren"); // title
+        alertLose.setHeaderText("Zelfs dit is te moeilijk voor je..."); // header text
+        alertLose.setContentText("Kies een optie:"); // content text
 
-        ButtonType retryButton = new ButtonType("Opnieuw spelen");
-        ButtonType quitButton = new ButtonType("Spel afsluiten");
+        ButtonType retryButton = new ButtonType("Opnieuw spelen"); // button for retry
+        ButtonType quitButton = new ButtonType("Spel afsluiten"); // button for exit
 
         alertLose.getButtonTypes().setAll(retryButton, quitButton);
 
         Optional<ButtonType> result = alertLose.showAndWait();
         if (result.get() == retryButton){
-            wordIsCreated = false;
-            amountOfChances = 5;
-            getRandomWord();
+            setDefaultValues(imageView); // reset values
         } else if (result.get() == quitButton) {
-            System.exit(0);
+            System.exit(0); // exit program
         }
     }
 
-    public static void showGameWin() {//method to show a message that tells the player he won
-        Alert alertWin = new Alert(Alert.AlertType.INFORMATION);//creates an alert window
+    public static void showGameWin(ImageView imageView) {//method to show a message that tells the player he won
+        Alert alertWin = new Alert(Alert.AlertType.CONFIRMATION);//creates an alert window
         alertWin.setTitle("WINNER WINNER CHICKEN DINNER!");//sets the title of the window to this
         alertWin.setContentText("Congratulations you win!!");//sets the content text to this
 
@@ -150,13 +149,22 @@ public class Model {
 
         Optional<ButtonType> result = alertWin.showAndWait();//shows the buttons
         if (result.get() == retryButton){//if you press the reset button
-            wordIsCreated = false;//set default states
-            amountOfChances = 5;
-
-            getRandomWord();
+            setDefaultValues(imageView); // reset values
         } else if (result.get() == quitButton) {//if you press quit button
-            System.exit(0);//exit programm
+            System.exit(0);//exit program
         }
 
+    }
+
+    public static void setDefaultValues(ImageView imageView) { // reset to default values
+        wordIsCreated = false; // allow to create a new word
+        getRandomWord(); // create a new word
+        amountOfChances = 5; // default value of chances
+        Image image0 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage0.png"));
+        imageView.setImage(image0); // set the hangman to beginning stage
+        selectedWordCharArray = getRandomWord().toCharArray(); // reset this char array
+        labelWordCharArray = new char[selectedWordCharArray.length]; // reset this char array
+
+        // !!!!!! reset de foute letters !!!!
     }
 }
