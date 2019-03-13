@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Model {
 
-    private static String[] getWordsArray() {
+    private static String[] getWordsArray() {//method to return an array of words
         return new String[]{
                 "appel", "banaan", "pelikaan", "auto", "laptop", "beeldscherm", "toetsenbord", "natuur", "lampen",
                 "jassen", "adapter", "lichtbron", "bankstel", "stekker", "oordopjes", "koptelefoon", "kruk", "bar",
@@ -18,18 +18,18 @@ public class Model {
         };
     }
 
-    private static boolean wordIsCreated = false;
-    private static String createdWord;
+    private static boolean wordIsCreated = false;//sets the default for the boolean variable wordIsCreated
+    private static String createdWord;//initializes a String variable for the createdWord
 
-    public static String getRandomWord() {
-        if (!wordIsCreated) {
-            String[] words = getWordsArray();
-            Random rand = new Random();
+    public static String getRandomWord() {//method to generate a random word out of the array
+        if (!wordIsCreated) {//if wordIsCreated returns false
+            String[] words = getWordsArray();//turns the words array from the method getWordsArray into an array we can use locally
+            Random rand = new Random();//creates a randomizer object
             int randomNumber = rand.nextInt(30); // Obtain a number between [0 - 30]
-            createdWord = words[randomNumber];
-            wordIsCreated = true;
+            createdWord = words[randomNumber];//createdWord variable  gets set to the random word
+            wordIsCreated = true;//sets the wordIsCreated boolean to true
         }
-        return createdWord;
+        return createdWord;//return the createdWord return
 
     }
 
@@ -96,20 +96,27 @@ public class Model {
     }
 
 
-    public static void addCharToFaultyChars(String inputChar, Label label) {
-        if (label.getText().isEmpty()) { // add the first faulty char
-            label.setText(inputChar);
+    public static void addCharToFaultyChars(String inputChar, Label wrongLettersLabel) {//method to add the wrong guessed words to the
+        if (wrongLettersLabel.getText().isEmpty()) { //if the wrongLettersLabel = empty then
+            wrongLettersLabel.setText(inputChar);// add the first faulty char
         } else { // append faulty char
-            label.setText(label.getText() + ", " + inputChar);
+            wrongLettersLabel.setText(wrongLettersLabel.getText() + ", " + inputChar);//using commas
         }
     }
 
-    public static void validateWord(Label wordLabel, TextField wordInputField, Label chancesLabel, ImageView galgjeStage) {
+    public static void validateWord(Label wordLabel, TextField wordInputField, Label chancesLabel, ImageView galgjeStage) {//method to validate the word inserted in wordInputField
 
-        if (wordInputField.getText().equals(Model.getRandomWord())){
-            wordLabel.setText("YOU WIN!");
-        } else {
-            decreaseChances(chancesLabel, galgjeStage);
+        if (wordInputField.getText().equals(Model.getRandomWord())){//if text of wordInputField equals the random word
+            wordLabel.setText("YOU WIN!");//tell the player he won
+        }
+
+        else if(wordInputField.getText().length() <= 1){//else if the wordInputField has less than 2 characters
+            wordLabel.setText("Not enough characters entered to make a word");//tell the player there are not enough characters
+        }
+
+        else {
+            decreaseChances(chancesLabel, galgjeStage);//else decrease the amount of chances
+//            error
         }
     }
 }

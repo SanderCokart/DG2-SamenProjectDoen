@@ -32,7 +32,7 @@ public class Controller {
     }
 
     public void validateWordInput(ActionEvent event) {
-        Model.validateWord(wordLabel, wordInputField, chancesLabel, galgjeStage);
+        Model.validateWord(wordLabel, wordInputField, chancesLabel, galgjeStage);//method to validate if the word matches with the wordInputField
     }
 
 }
