@@ -125,7 +125,7 @@ public class Model {
         Alert alertLose = new Alert(Alert.AlertType.CONFIRMATION); // alert window with type
         alertLose.setTitle("Je hebt verloren"); // title
         alertLose.setHeaderText("Zelfs dit is te moeilijk voor je..."); // header text
-        alertLose.setContentText("Kies een optie:"); // content text
+        alertLose.setContentText("Het woord was: " + getRandomWord()); // content text with word
 
         ButtonType retryButton = new ButtonType("Opnieuw spelen"); // button for retry
         ButtonType quitButton = new ButtonType("Spel afsluiten"); // button for exit
