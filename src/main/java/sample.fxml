@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -20,43 +22,56 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox prefHeight="60.0" prefWidth="1000.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
+      <HBox prefHeight="60.0" prefWidth="1000.0">
          <children>
-            <TextField fx:id="charInputField" alignment="CENTER" prefHeight="60.0" prefWidth="130.0" promptText="Letter invullen">
-               <font>
-                  <Font name="Agency FB" size="18.0" />
-               </font></TextField>
-            <Button mnemonicParsing="false" onAction="#validateCharInput" prefHeight="60.0" prefWidth="130.0" text="Letter invoeren" textAlignment="CENTER">
-               <font>
-                  <Font name="Agency FB" size="18.0" />
-               </font></Button>
-            <TextField fx:id="wordInputField" alignment="CENTER" disable="true" prefHeight="60.0" prefWidth="500.0" promptText="Woord invoeren">
+            <TextField fx:id="charInputField" alignment="CENTER" prefHeight="54.0" prefWidth="514.0" promptText="LETTER INVULLEN" style="-fx-background-radius: 0; -fx-border-color: ffff; -fx-background-color: ddffff;">
                <font>
                   <Font name="Agency FB" size="28.0" />
                </font></TextField>
-            <Button mnemonicParsing="false" onAction="#validateWordInput" prefHeight="58.0" prefWidth="248.0" text="Woord invoeren">
+            <TextField fx:id="wordInputField" alignment="CENTER" disable="true" prefHeight="60.0" prefWidth="500.0" promptText="WOORD INVULLEN" style="-fx-background-radius: 0; -fx-border-color: FFFF; -fx-background-color: FFddff;">
                <font>
                   <Font name="Agency FB" size="28.0" />
-               </font></Button>
+               </font></TextField>
          </children>
       </HBox>
-      <HBox prefHeight="138.0" prefWidth="1000.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
+      <HBox prefHeight="104.0" prefWidth="1000.0" />
+      <HBox prefHeight="104.0" prefWidth="1000.0">
          <children>
-            <Label fx:id="wrongLettersLabel" alignment="CENTER" prefHeight="138.0" prefWidth="760.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;" textAlignment="CENTER">
+            <Pane layoutX="424.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
+            <Button mnemonicParsing="false" onAction="#validateCharInput" prefHeight="57.0" prefWidth="521.0" style="-fx-padding: 0px; -fx-background-color: d00; -fx-background-radius: 10px;" text="LETTER INVOEREN" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Agency FB" size="96.0" />
-               </font></Label>
-            <Label fx:id="chancesLabel" alignment="CENTER" prefHeight="138.0" prefWidth="248.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;" text="5" textAlignment="CENTER">
+                  <Font name="Agency FB Bold" size="28.0" />
+               </font></Button>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#validateWordInput" prefHeight="56.0" prefWidth="505.0" style="-fx-background-color: d00; -fx-background-radius: 10px;" text="WOORD INVOEREN" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Agency FB" size="96.0" />
-               </font></Label>
+                  <Font name="Agency FB Bold" size="28.0" />
+               </font></Button>
+            <Pane layoutX="456.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="170.0" prefWidth="1000.0" style=" -fx-border-color:black; -fx-border-width: 1; -fx-border-style: solid;">
+      <HBox prefHeight="104.0" prefWidth="1000.0" />
+      <HBox prefHeight="138.0" prefWidth="1000.0">
+         <children>
+            <Label fx:id="wrongLettersLabel" alignment="CENTER" prefHeight="138.0" prefWidth="760.0" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Agency FB" size="46.0" />
+               </font></Label>
+            <Label fx:id="chancesLabel" alignment="CENTER" prefHeight="138.0" prefWidth="248.0" style="-fx-border-width: 1; -fx-background-color: d00;" text="5" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Agency FB" size="96.0" />
+               </font></Label>
+            <Pane prefHeight="116.0" prefWidth="268.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="170.0" prefWidth="1000.0">
          <children>
             <Label fx:id="wordLabel" alignment="CENTER" prefHeight="163.0" prefWidth="1005.0" textAlignment="CENTER" underline="true">
                <font>
-                  <Font name="Agency FB Bold" size="45.0" />
+                  <Font name="Arial Black" size="45.0" />
                </font></Label>
          </children>
       </HBox>
