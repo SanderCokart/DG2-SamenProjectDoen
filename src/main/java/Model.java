@@ -38,7 +38,7 @@ public class Model {
 
     static int amountOfChances = 5;
 
-    public static int decreaseChances(Label chancesLabel, ImageView imageView) {
+    public static int decreaseChances(Label chancesLabel, ImageView imageView, Label wordLabel, Label wrongLettersLabel) {
         amountOfChances--; // decrease by 1
         chancesLabel.setText(Integer.toString(amountOfChances)); // update the label
         switch (amountOfChances) { // update stage of HANGMAN according to amount of chances
@@ -61,7 +61,7 @@ public class Model {
             case 0: // game over
                 Image image5 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage5.png"));
                 imageView.setImage(image5);
-                showGameLost(imageView);
+                showGameLost(imageView, wordLabel, wrongLettersLabel);
                 break;
         }
         return amountOfChances; // return the new amount of chances
@@ -105,21 +105,20 @@ public class Model {
         }
     }
 
-    public static void validateWord(TextField wordInputField, Label chancesLabel, ImageView galgjeStage) {//method to validate the word inserted in wordInputField
-
+    public static void validateWord(TextField wordInputField, Label chancesLabel, ImageView galgjeStage, Label wordLabel, Label wrongLettersLabel) {//method to validate the word inserted in wordInputField
         if (wordInputField.getText().equals(Model.getRandomWord())){//if text of wordInputField equals the random word
-            showGameWin(galgjeStage);
+            showGameWin(galgjeStage, wordLabel, wrongLettersLabel);
         } else if (wordInputField.getText().length() <= 1){//else if the wordInputField has less than 2 characters
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Niet genoeg characters!");
             alert.setContentText("Zorg wel dat er genoeg letters zijn om een woord te maken!");
             alert.showAndWait();
         } else {
-            decreaseChances(chancesLabel, galgjeStage);//else decrease the amount of chances
+            decreaseChances(chancesLabel, galgjeStage, wordLabel, wrongLettersLabel);//else decrease the amount of chances
         }
     }
 
-    public static void showGameLost(ImageView imageView) { // method for losing screen
+    public static void showGameLost(ImageView imageView, Label wordLabel, Label wrongLettersLabel) { // method for losing screen
         Alert alertLose = new Alert(Alert.AlertType.CONFIRMATION); // alert window with type
         alertLose.setTitle("Je hebt verloren"); // title
         alertLose.setHeaderText("Zelfs dit is te moeilijk voor je..."); // header text
@@ -132,13 +131,13 @@ public class Model {
 
         Optional<ButtonType> result = alertLose.showAndWait();
         if (result.get() == retryButton){
-            setDefaultValues(imageView); // reset values
+            setDefaultValues(imageView, wordLabel, wrongLettersLabel); // reset values
         } else if (result.get() == quitButton) {
             System.exit(0); // exit program
         }
     }
 
-    public static void showGameWin(ImageView imageView) {//method to show a message that tells the player he won
+    public static void showGameWin(ImageView imageView, Label wordLabel, Label wrongLettersLabel) {//method to show a message that tells the player he won
         Alert alertWin = new Alert(Alert.AlertType.CONFIRMATION);//creates an alert window
         alertWin.setTitle("WINNER WINNER CHICKEN DINNER!");//sets the title of the window to this
         alertWin.setContentText("Congratulations you win!!");//sets the content text to this
@@ -149,14 +148,14 @@ public class Model {
 
         Optional<ButtonType> result = alertWin.showAndWait();//shows the buttons
         if (result.get() == retryButton){//if you press the reset button
-            setDefaultValues(imageView); // reset values
+            setDefaultValues(imageView, wordLabel, wrongLettersLabel); // reset values
         } else if (result.get() == quitButton) {//if you press quit button
             System.exit(0);//exit program
         }
 
     }
 
-    public static void setDefaultValues(ImageView imageView) { // reset to default values
+    public static void setDefaultValues(ImageView imageView, Label wordLabel, Label wrongLettersLabel) { // reset to default values
         wordIsCreated = false; // allow to create a new word
         getRandomWord(); // create a new word
         amountOfChances = 5; // default value of chances
@@ -164,7 +163,7 @@ public class Model {
         imageView.setImage(image0); // set the hangman to beginning stage
         selectedWordCharArray = getRandomWord().toCharArray(); // reset this char array
         labelWordCharArray = new char[selectedWordCharArray.length]; // reset this char array
-
-        // !!!!!! reset de foute letters !!!!
+        wordLabel.setText(""); // reset the word
+        wrongLettersLabel.setText(""); // reset the wrong letters
     }
 }

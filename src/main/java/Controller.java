@@ -21,7 +21,7 @@ public class Controller {
         if (Model.validateChar(charInputValue, Model.getRandomWord())) { // char matches
             Model.addCharToSelectedWord(charInputValue.charAt(0), Model.getRandomWord(), wordLabel); // add char to selected word
         } else if (charInputValue.length() == 1 && Character.isLetter(charInputValue.charAt(0))) { // char doesn't match
-            Model.decreaseChances(chancesLabel, galgjeStage); // decrease chances and update label
+            Model.decreaseChances(chancesLabel, galgjeStage, wordLabel, wrongLettersLabel); // decrease chances and update label
             Model.addCharToFaultyChars(charInputValue, wrongLettersLabel); // add char to the faulty char label
         } else { // give error message
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -35,7 +35,7 @@ public class Controller {
 
     public void validateWordInput(ActionEvent event) {
         if (wordButtonIsPressed) { // check if the word is correct and disable the inputfield
-            Model.validateWord(wordInputField, chancesLabel, galgjeStage);//method to validate if the word matches with the wordInputField
+            Model.validateWord(wordInputField, chancesLabel, galgjeStage, wordLabel, wrongLettersLabel);//method to validate if the word matches with the wordInputField
             wordInputField.setDisable(true);
             wordButtonIsPressed = false;
         } else { // allow the inputfield to be changed
