@@ -61,7 +61,7 @@ public class Model {
             case 0: // game over
                 Image image5 = new Image(Model.class.getResourceAsStream("../resources/galgjeStage5.png"));
                 imageView.setImage(image5);
-                showGameLost(imageView, wordLabel, wrongLettersLabel);
+                showGameLost(imageView, wordLabel, wrongLettersLabel, chancesLabel);
                 break;
         }
         return amountOfChances; // return the new amount of chances
@@ -83,7 +83,7 @@ public class Model {
     private static char[] labelWordCharArray = new char[selectedWordCharArray.length]; // create char array that will be set to the label
     private static int i = 0; // initialise index counter
 
-    public static void addCharToSelectedWord(char inputChar, String word, Label label) {
+    public static void addCharToSelectedWord(char inputChar, String word, Label wordLabel, ImageView galgjeStage, Label wrongLettersLabel, Label chancesLabel) {
         for (char selectedWordChar : selectedWordCharArray) {
             if (inputChar == selectedWordChar) { // if char matches char in selectedWordCharArray
                 labelWordCharArray[i] = inputChar;
@@ -94,7 +94,10 @@ public class Model {
         }
         i = 0; // reset index counter
         String string = new String(labelWordCharArray); // convert char array to String
-        label.setText(string); // set array to label
+        wordLabel.setText(string); // set array to label
+        if (string.equals(getRandomWord())){
+            showGameWin(galgjeStage, wordLabel, wrongLettersLabel, chancesLabel);
+        }
     }
 
     public static void addCharToFaultyChars(String inputChar, Label wrongLettersLabel) {//method to add the wrong guessed words to the
@@ -107,7 +110,7 @@ public class Model {
 
     public static void validateWord(TextField wordInputField, Label chancesLabel, ImageView galgjeStage, Label wordLabel, Label wrongLettersLabel) {//method to validate the word inserted in wordInputField
         if (wordInputField.getText().equals(Model.getRandomWord())){//if text of wordInputField equals the random word
-            showGameWin(galgjeStage, wordLabel, wrongLettersLabel);
+            showGameWin(galgjeStage, wordLabel, wrongLettersLabel, chancesLabel);
         } else if (wordInputField.getText().length() <= 1){//else if the wordInputField has less than 2 characters
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Niet genoeg characters!");
@@ -118,7 +121,7 @@ public class Model {
         }
     }
 
-    public static void showGameLost(ImageView imageView, Label wordLabel, Label wrongLettersLabel) { // method for losing screen
+    public static void showGameLost(ImageView imageView, Label wordLabel, Label wrongLettersLabel, Label chancesLabel) { // method for losing screen
         Alert alertLose = new Alert(Alert.AlertType.CONFIRMATION); // alert window with type
         alertLose.setTitle("Je hebt verloren"); // title
         alertLose.setHeaderText("Zelfs dit is te moeilijk voor je..."); // header text
@@ -131,13 +134,13 @@ public class Model {
 
         Optional<ButtonType> result = alertLose.showAndWait();
         if (result.get() == retryButton){
-            setDefaultValues(imageView, wordLabel, wrongLettersLabel); // reset values
+            setDefaultValues(imageView, wordLabel, wrongLettersLabel, chancesLabel); // reset values
         } else if (result.get() == quitButton) {
             System.exit(0); // exit program
         }
     }
 
-    public static void showGameWin(ImageView imageView, Label wordLabel, Label wrongLettersLabel) {//method to show a message that tells the player he won
+    public static void showGameWin(ImageView imageView, Label wordLabel, Label wrongLettersLabel, Label chancesLabel) {//method to show a message that tells the player he won
         Alert alertWin = new Alert(Alert.AlertType.CONFIRMATION);//creates an alert window
         alertWin.setTitle("WINNER WINNER CHICKEN DINNER!");//sets the title of the window to this
         alertWin.setContentText("Congratulations you win!!");//sets the content text to this
@@ -148,14 +151,14 @@ public class Model {
 
         Optional<ButtonType> result = alertWin.showAndWait();//shows the buttons
         if (result.get() == retryButton){//if you press the reset button
-            setDefaultValues(imageView, wordLabel, wrongLettersLabel); // reset values
+            setDefaultValues(imageView, wordLabel, wrongLettersLabel, chancesLabel); // reset values
         } else if (result.get() == quitButton) {//if you press quit button
             System.exit(0);//exit program
         }
 
     }
 
-    public static void setDefaultValues(ImageView imageView, Label wordLabel, Label wrongLettersLabel) { // reset to default values
+    public static void setDefaultValues(ImageView imageView, Label wordLabel, Label wrongLettersLabel, Label chancesLabel) { // reset to default values
         wordIsCreated = false; // allow to create a new word
         getRandomWord(); // create a new word
         amountOfChances = 5; // default value of chances
@@ -165,5 +168,6 @@ public class Model {
         labelWordCharArray = new char[selectedWordCharArray.length]; // reset this char array
         wordLabel.setText(""); // reset the word
         wrongLettersLabel.setText(""); // reset the wrong letters
+        chancesLabel.setText(Integer.toString(amountOfChances));
     }
 }

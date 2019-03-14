@@ -19,7 +19,7 @@ public class Controller {
     public void validateCharInput(ActionEvent event) {
         String charInputValue = charInputField.getText(); // get value of input field
         if (Model.validateChar(charInputValue, Model.getRandomWord())) { // char matches
-            Model.addCharToSelectedWord(charInputValue.charAt(0), Model.getRandomWord(), wordLabel); // add char to selected word
+            Model.addCharToSelectedWord(charInputValue.charAt(0), Model.getRandomWord(), wordLabel, galgjeStage, wrongLettersLabel, chancesLabel); // add char to selected word
         } else if (charInputValue.length() == 1 && Character.isLetter(charInputValue.charAt(0))) { // char doesn't match
             Model.decreaseChances(chancesLabel, galgjeStage, wordLabel, wrongLettersLabel); // decrease chances and update label
             Model.addCharToFaultyChars(charInputValue, wrongLettersLabel); // add char to the faulty char label
